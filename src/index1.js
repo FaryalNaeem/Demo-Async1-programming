@@ -20,19 +20,15 @@ function preparecoffee(callback){
   
   },30);
 }
-function mycallback(value){
-  console.log("food is ready callback", value);
-  preparefrenchtoast(frenchtoastcallback);
-
-}
-function frenchtoastcallback(value){
-  console.log("frenchtoast is ready callback", value);
-  preparecoffee(coffeecallback)
-}
-function coffeecallback(value){
-  console.log("food is ready callback", value);
-}
-preparefood(mycallback);
+preparefood(function(value){
+    console.log("food is ready callback", value);
+    preparefrenchtoast(function(value){
+        console.log("frenchtoast is ready callback", value);
+        preparecoffee(function (value){
+            console.log("food is ready callback", value);
+          });
+      });
+  });
 
 
 console.log("After prapare food dinner is ready");
